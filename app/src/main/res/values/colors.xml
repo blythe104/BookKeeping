@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/normal</color>
+    <color name="colorPrimaryDark">@color/normal</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="colorGreen">#3fb58e</color>
+    <color name="actionBar_color">#34d100</color>
+    <color name="white">#fafafa</color>
+
+    <color name="bg">#434056</color>
+
+    <color name="green_color">#223124</color>
+
+    <color name="blue_color">#5b7e89</color>
+
+    <color name="pale_color">#41372b</color>
+
+    <color name="green_paint_color">#f705e718</color>
+
+    <color name="blue_paint_color">#2037bc</color>
+
+    <color name="pale_paint_color">#e78006</color>
+
+    <color name="gray">#cccccc</color>
+    <color name="divider_gray">#efebeb</color>
+
+    <color name="green">#baf212</color>
+
+    <color name="theme_color">#ff8b00</color>
+    <color name="theme_red">@color/selected</color>
+    <color name="red">#fd2606</color>
+    <color name="transparent">@android:color/transparent</color>
+    <color name="selected">#eb4f38</color>
+    <color name="normal">#31455b</color>
+    <color name="deep_normal">#1b2c40</color>
+
+    <color name="line_color">@color/normal</color>
+    <color name="theme_white">@color/white</color>
+    <color name="theme_gray">@color/gray</color>
+</resources>

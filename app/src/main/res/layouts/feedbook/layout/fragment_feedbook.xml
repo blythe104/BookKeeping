@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <cn.book.keeping.libs.ui.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/et_feed_book_content"
+        android:layout_width="match_parent"
+        android:layout_height="220dip"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:background="@drawable/shape_normal_center_empty"
+        android:gravity="top"
+        android:padding="4dip" />
+
+    <Button
+        android:id="@+id/btn_submit_feedbook"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:background="@drawable/selector_btn"
+        android:text="@string/submit"
+        android:textColor="@color/selector_btn"
+        android:textSize="@dimen/text_normal" />
+</LinearLayout>

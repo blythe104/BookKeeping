@@ -1,0 +1,124 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+
+    defaultConfig {
+        applicationId "cn.book.keeping"
+        minSdkVersion 22
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res/layouts',
+                    'src/main/res/layouts/main',
+                    'src/main/res/layouts/base',
+                    'src/main/res/layouts/guide',
+                    'src/main/res/layouts/setting',
+                    'src/main/res/layouts/feedbook',
+                    'src/main/res/layouts/register',
+                    'src/main/res/layouts/login',
+                    'src/main/res']
+        }
+    }
+
+    signingConfigs {
+        debugConfig {
+            keyAlias 'qisheng.keystore'
+            keyPassword 'qisheng'
+            storeFile file('../qisheng.keystore')
+            storePassword 'qisheng'
+        }
+
+        releaseConfig {
+            keyAlias 'qisheng.keystore'
+            keyPassword 'qisheng'
+            storeFile file('../qisheng.keystore')
+            storePassword 'qisheng'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    //修改生成的apk名字
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def oldFile = output.outputFile
+            if (variant.buildType.name.equals('release')) {
+                def releaseApkName = '企盛办公平台-v' + defaultConfig.versionName + '-' + android.defaultConfig.versionName + " - " + '.apk'
+                output.outputFile = new File(oldFile.parent, releaseApkName)
+            } else if (variant.buildType.name.equals('debug')) {
+                def releaseApkName = getDebugApkName()
+                output.outputFile = new File(oldFile.parent, releaseApkName)
+            }
+        }
+    }
+    //proguard-android.txt
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-rules.pro'), 'proguard-rules.pro'
+            manifestPlaceholders = [JPUSH_KEY: "db688f223eff218650ff5a99"]
+            resValue("string", "app_name", "记账本")
+            signingConfig signingConfigs.debugConfig
+        }
+        debug {
+            minifyEnabled true
+            shrinkResources true //设置为true,将会把没有用到的资源不打包
+            //构建测试版本//In order to install multiple build types on a single device
+            versionNameSuffix '-debug'
+            applicationIdSuffix '.debug'
+            manifestPlaceholders = [JPUSH_KEY: "66ce44099e2b1d12a5f73086"]
+            resValue("string", "app_name", "测试-记账")
+            signingConfig signingConfigs.debugConfig
+        }
+    }
+    productFlavors {
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+def releaseTime() {
+    new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"));
+}
+
+def getDebugApkName() {
+    '测试-记账本-v' + android.defaultConfig.versionName + '-' + "(" + releaseTime() + ")" + '-' + android.defaultConfig.versionName + '.apk'
+}
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:palette-v7:24.2.0'
+    compile 'com.android.support:support-v4:24.2.0'
+    compile 'com.android.support:support-v4:24.2.0'
+    compile 'com.android.support:design:24.2.0'
+    compile 'com.badoo.mobile:android-weak-handler:1.1'
+    compile('de.keyboardsurfer.android.widget:crouton:1.8.4@aar') {
+        exclude group: 'com.google.android', module: 'support-v4'
+    }
+    //友盟统计
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    //Bmob云数据库需要的jar包
+    compile files('libs/BmobPush_v1.0.0_0627.jar')
+    compile files('libs/BmobSDK_3.5.1_20160719.jar')
+    compile files('libs/filechoose.jar')
+    compile files('libs/gson-2.6.2.jar')
+    compile files('libs/okhttp-3.3.1.jar')
+    compile files('libs/okio-1.7.0.jar')
+    compile files('libs/rxandroid-1.2.0.jar')
+    compile files('libs/rxjava-1.1.6.jar')
+}
